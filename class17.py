@@ -3,7 +3,7 @@ import random as r # random como "r"
 # from random import randint, random, uniform
 
 # random.seed(1)
-# randInt = r.randint(1,10)
+# randInt = r.randint(1,10) a<=n<=b
 # print(randInt)
 
 # randomFloat = r.random() # random de 0 -> 0.1 all float
