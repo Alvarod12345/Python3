@@ -16,6 +16,7 @@ import math
 #     print(i)
 
 Val = 3
+Val1 = 3.97
 sqrtVal = math.sqrt(Val)
 print(sqrtVal)
 print(sqrtVal**2)
@@ -29,7 +30,7 @@ print(factVal)
 sinVal = math.sin(Val)
 print(sinVal)
 
-floorVal = math.floor(Val)
+floorVal = math.floor(Val1)
 print(floorVal)
 
 ceilingValue = math.ceil(Val)
