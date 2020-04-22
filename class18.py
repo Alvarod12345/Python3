@@ -40,9 +40,11 @@ except ZeroDivisionError:
     print("zero division error")
 except AttributeError:
     print("you got a atribute error")
-    
+
 except Exception as x:
     print("except")
     print(str(x))
 finally:
     print("finally")
+
+
