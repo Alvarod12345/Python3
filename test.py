@@ -801,3 +801,25 @@ class Team:
 
 # #floats
 # print("Result: ",compare("1.1", "1","1.1"))
+
+
+
+
+# BlackJack Game
+
+from random import shuffle
+def createDeck():
+    deck = []
+    facesValues = ["A","J","Q","K"]
+
+    for i in range(4):
+        for card in range(2,10):
+            deck.append(str(card))
+
+        for card in facesValues:
+            deck.append(card)
+    shuffle(deck)
+    return deck
+cardDeck = createDeck()
+print(cardDeck)
+
