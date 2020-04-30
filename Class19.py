@@ -17,10 +17,11 @@ cardDeck = createDeck()
 # print(cardDeck)
 
 class player:
+
     def __init__(self, hand = [], money = 100):
         self.hand = hand
         self.score = self.setScore()
-        print(self.score)
+        # print(self.score)
         self.money = money
         self.bet = 0    
 
@@ -70,25 +71,58 @@ class player:
         else:
             self.bet = 0
 
+def printHouse(House):
+    for card in range(len(House.hand)):
+        if card == 0:
+            print("X", end = " ")
+        elif card == len(House.hand) - 1:
+            print(House.hand[card])
+        else:
+            print(House.hand[card], end = " ")
+            
+            
+# def test
 
-Player1 = player(["8","10","9"])
-print(Player1)
+    # Player1 = player(["8","10","9"])
+    # print(Player1)
 
-Player1.hit("A")
-Player1.hit("A")
-print(Player1)
-
-
-Player1.betMoney(20)
-print("Your money: ",Player1.money,"Your bet: ", Player1.bet)
-
-Player1.win(True)
-print("You win: ",Player1.money,"Your bet now: ", Player1.bet)
+    # Player1.hit("A")
+    # Player1.hit("A")
+    # print(Player1)
 
 
-Player1.play(["A","K"])
-print(Player1)
-Player1.betMoney(20)
-print("Your bet: ", Player1.bet)
-Player1.win(True)
-print("You win", Player1.money)
+    # Player1.betMoney(20)
+    # print("Your money: ",Player1.money,"Your bet: ", Player1.bet)
+
+    # Player1.win(True)
+    # print("You win: ",Player1.money,"Your bet now: ", Player1.bet)
+
+
+    # Player1.play(["A","K"])
+    # print(Player1)
+    # Player1.betMoney(20)
+    # print("Your bet: ", Player1.bet)
+    # Player1.win(True)
+    # print("You win", Player1.money)
+
+
+cardDeck = createDeck()
+firstHand = [cardDeck.pop(),cardDeck.pop()]
+secondHand = [cardDeck.pop(),cardDeck.pop()]
+Player1 = player(firstHand)
+House = player(secondHand)
+print("cardeck",cardDeck)
+printHouse(House)
+print("Player1: ",Player1)
+while(Player1.score < 21):
+    action = (input("Do you want another card? (y/n): ").lower())
+    if action == "y":
+        Player1.hit(cardDeck.pop())
+        print("Player1: ",Player1)
+        printHouse(House)
+    else: 
+        printHouse(House)
+        break
+# print("House: ",House)
+
+
