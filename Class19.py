@@ -71,10 +71,20 @@ class player:
         else:
             self.bet = 0
 
+    def draw(self):
+        self.money += self.bet
+        self.bet = 0
+
+    def hasBlackJack(self):
+        if self.score == 21 and len(self.hand) == 2:
+            return True
+        else:
+            return False
+
 def printHouse(House):
     for card in range(len(House.hand)):
         if card == 0:
-            print("X", end = " ")
+            print("House: ","X", end = " ")
         elif card == len(House.hand) - 1:
             print(House.hand[card])
         else:
@@ -111,18 +121,58 @@ firstHand = [cardDeck.pop(),cardDeck.pop()]
 secondHand = [cardDeck.pop(),cardDeck.pop()]
 Player1 = player(firstHand)
 House = player(secondHand)
-print("cardeck",cardDeck)
-printHouse(House)
-print("Player1: ",Player1)
-while(Player1.score < 21):
-    action = (input("Do you want another card? (y/n): ").lower())
-    if action == "y":
-        Player1.hit(cardDeck.pop())
-        print("Player1: ",Player1)
-        printHouse(House)
-    else: 
-        printHouse(House)
-        break
-# print("House: ",House)
+cardDeck = createDeck()
 
+while(True):
+    if len(cardDeck) < 20:
+        cardDeck = createDeck()
+    firstHand = [cardDeck.pop(),cardDeck.pop()]
+    secondHand = [cardDeck.pop(),cardDeck.pop()]
+    
+    Player1.play(firstHand)
+    House.play(secondHand)
 
+    bet = int(input("Enter your bet: "))
+    
+    Player1.betMoney(bet)
+    printHouse(House)
+    print("Player1: ",Player1)
+
+    if Player1.hasBlackJack():
+        if House.hasBlackJack():
+            Player1.draw()
+        else:
+            Player1.win(True)
+    else:
+        while(Player1.score < 21):
+            action = (input("Do you want another card? (y/n): ").lower())
+            if action == "y":
+                Player1.hit(cardDeck.pop())
+                printHouse(House)
+                print("Player1: ",Player1)
+
+            else: 
+                printHouse(House)
+                print("Player1 : ",Player1)
+                break
+        
+        while(House.score < 16):
+            House.hit(cardDeck.pop())
+            
+        
+        if Player1.score > 21:
+            if House.score > 21:
+                Player1.draw()
+            else:
+                Player1.win(False)
+        elif Player1.score > House.score:
+            Player1.win(True)
+        elif Player1.score == House.score:
+            Player1.draw()
+        else:
+            if House.score > 21:
+                Player1.win(True)
+            else:
+                Player1.win(False)
+    print("House: ",House)
+    print("Money: ",Player1.money)
